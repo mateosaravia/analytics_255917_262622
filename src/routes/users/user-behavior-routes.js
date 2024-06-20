@@ -4,8 +4,9 @@ const userBehaviorController = require('../controllers/userBehaviorController');
 
 const router = Router();
 
-router.get('/', userBehaviorController.getAllUserBehavior);
-router.get('/:id', userBehaviorController.getUserBehaviorById);
-router.post('/', userBehaviorController.createUserBehavior);
+router.get('/total-sessions-duration', userBehaviorController.getTotalSessionsDuration);
+router.get('/average-sessions-duration', userBehaviorController.getAverageSessionsDuration);
+router.get('/all-social-interactions', userBehaviorController.getAllSocialInteractions);
+router.get('/average-social-interactions', userBehaviorController.getAverageSocialInteractions);
 
 module.exports = router;

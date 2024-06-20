@@ -1,72 +1,88 @@
 const verticaClient = require('../config/verticaConfig');
 
-async function getAllUserBehavior() {
+async function getTotalSessionsDuration() {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT user_id, hours_played, favorite_genre
-      FROM user_behavior
-      ORDER BY user_id;
+      SELECT SUM(duration) AS total_sessions_duration
+      FROM user_sessions;
     `;
 
     const result = await verticaClient.query(query);
-    return result.rows;
+    return result.rows[0];
 
   } catch (err) {
-    console.error('Error fetching user behavior:', err);
+    console.error('Error fetching total sessions duration:', err);
     throw new Error('Database query error');
   } finally {
     await verticaClient.end();
   }
-}
+};
 
-async function getUserBehaviorById(userId) {
+async function getAverageSessionsDuration() {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT user_id, hours_played, favorite_genre
-      FROM user_behavior
-      WHERE user_id = $1;
+      SELECT AVG(duration) AS average_sessions_duration
+      FROM user_sessions;
     `;
 
-    const result = await verticaClient.query(query, [userId]);
+    const result = await verticaClient.query(query);
     return result.rows[0];
 
   } catch (err) {
-    console.error(`Error fetching user behavior for user ID ${userId}:`, err);
+    console.error('Error fetching average sessions duration:', err);
     throw new Error('Database query error');
   } finally {
     await verticaClient.end();
   }
-}
+};
 
-async function createUserBehavior(userData) {
-  const { user_id, hours_played, favorite_genre } = userData;
-
+async function getAllSocialInteractions() {
   try {
     await verticaClient.connect();
 
     const query = `
-      INSERT INTO user_behavior (user_id, hours_played, favorite_genre)
-      VALUES ($1, $2, $3)
-      RETURNING *;
+      SELECT COUNT(*) AS social_interactions
+      FROM user_social_interactions;
     `;
 
-    const result = await verticaClient.query(query, [user_id, hours_played, favorite_genre]);
+    const result = await verticaClient.query(query);
     return result.rows[0];
 
   } catch (err) {
-    console.error('Error creating user behavior:', err);
+    console.error('Error fetching social interactions:', err);
     throw new Error('Database query error');
   } finally {
     await verticaClient.end();
   }
-}
+};
+
+async function getAverageSocialInteractions() {
+  try {
+    await verticaClient.connect();
+
+    const query = `
+      SELECT AVG(interactions_count) AS average_social_interactions
+      FROM user_social_interactions;
+    `;
+
+    const result = await verticaClient.query(query);
+    return result.rows[0];
+
+  } catch (err) {
+    console.error('Error fetching average social interactions:', err);
+    throw new Error('Database query error');
+  } finally {
+    await verticaClient.end();
+  }
+};
 
 module.exports = {
-  getAllUserBehavior,
-  getUserBehaviorById,
-  createUserBehavior,
+  getTotalSessionsDuration,
+  getAverageSessionsDuration,
+  getAllSocialInteractions,
+  getAverageSocialInteractions,
 };

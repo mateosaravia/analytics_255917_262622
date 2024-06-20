@@ -1,39 +1,48 @@
-const userBehaviorService = require('../services/user-behavior-service');
+const userBehaviorService = require('../../services/users/user-behavior-service');
 
-async function getAllUserBehavior(req, res) {
+async function getTotalSessionsDuration (req, res) {
   try {
-    const userBehaviorData = await userBehaviorService.getAllUserBehavior();
-    res.json(userBehaviorData);
+    const totalSessionsDuration = await userBehaviorService.getTotalSessionsDuration();
+    res.json(totalSessionsDuration);
   } catch (err) {
-    console.error('Error fetching user behavior:', err);
+    console.error('Error fetching total sessions duration:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
 
-async function getUserBehaviorById(req, res) {
-  const { id } = req.params;
+async function getAverageSessionsDuration (req, res) {
   try {
-    const userBehaviorData = await userBehaviorService.getUserBehaviorById(id);
-    res.json(userBehaviorData);
+    const averageSessionsDuration = await userBehaviorService.getAverageSessionsDuration();
+    res.json(averageSessionsDuration);
   } catch (err) {
-    console.error(`Error fetching user behavior for user ID ${id}:`, err);
+    console.error('Error fetching average sessions duration:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
 
-async function createUserBehavior(req, res) {
-  const { body } = req;
+async function getAllSocialInteractions (req, res) {
   try {
-    const newUserBehavior = await userBehaviorService.createUserBehavior(body);
-    res.status(201).json(newUserBehavior);
+    const socialInteractions = await userBehaviorService.getAllSocialInteractions();
+    res.json(socialInteractions);
   } catch (err) {
-    console.error('Error creating user behavior:', err);
+    console.error('Error fetching social interactions:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
+async function getAverageSocialInteractions (req, res) {
+  try {
+    const averageSocialInteractions = await userBehaviorService.getAverageSocialInteractions();
+    res.json(averageSocialInteractions);
+  } catch (err) {
+    console.error('Error fetching average social interactions:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 module.exports = {
-  getAllUserBehavior,
-  getUserBehaviorById,
-  createUserBehavior,
+  getTotalSessionsDuration,
+  getAverageSessionsDuration,
+  getAllSocialInteractions,
+  getAverageSocialInteractions,
 };
