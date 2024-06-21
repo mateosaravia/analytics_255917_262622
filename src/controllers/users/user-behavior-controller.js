@@ -1,5 +1,16 @@
 const userBehaviorService = require('../../services/users/user-behavior-service');
 
+async function getSessionsDurationByGender (req, res) {
+  const { id } = req.params;
+  try {
+    const sessionsDuration = await userBehaviorService.getSessionsDurationByGender(id);
+    res.json(sessionsDuration);
+  } catch (err) {
+    console.error('Error fetching sessions duration: ', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 async function getTotalSessionsDuration (req, res) {
   try {
     const totalSessionsDuration = await userBehaviorService.getTotalSessionsDuration();
@@ -30,9 +41,9 @@ async function getAllSocialInteractions (req, res) {
   }
 };
 
-async function getAverageSocialInteractions (req, res) {
+async function getAvgSocialInteractions (req, res) {
   try {
-    const averageSocialInteractions = await userBehaviorService.getAverageSocialInteractions();
+    const averageSocialInteractions = await userBehaviorService.getAvgSocialInteractions();
     res.json(averageSocialInteractions);
   } catch (err) {
     console.error('Error fetching average social interactions:', err);
@@ -41,8 +52,9 @@ async function getAverageSocialInteractions (req, res) {
 };
 
 module.exports = {
+  getSessionsDurationByGender,
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,
-  getAverageSocialInteractions,
+  getAvgSocialInteractions,
 };

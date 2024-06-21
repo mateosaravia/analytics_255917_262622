@@ -1,4 +1,25 @@
-const verticaClient = require('../config/verticaConfig');
+const verticaClient = require('../../config/vertica-client');
+
+async function getSessionsDurationByGender(id) {
+  try {
+    await verticaClient.connect();
+
+    const query = `
+      SELECT SUM(duration) AS sessions_duration
+      FROM user_sessions
+      WHERE user_id = $1;
+    `;
+
+    const result = await verticaClient.query(query, [id]);
+    return result.rows[0];
+
+  } catch (err) {
+    console.error('Error fetching sessions duration: ', err);
+    throw new Error('Database query error');
+  } finally {
+    await verticaClient.end();
+  }
+};
 
 async function getTotalSessionsDuration() {
   try {
@@ -81,6 +102,7 @@ async function getAverageSocialInteractions() {
 };
 
 module.exports = {
+  getSessionsDurationByGender,
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,
