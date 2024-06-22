@@ -1,0 +1,10 @@
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (1, 1, 'Like', 2, '2023-01-01 10:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (2, 2, 'Follow', 3, '2023-01-02 11:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (3, 3, 'Comment', 4, '2023-01-03 12:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (4, 4, 'Like', 5, '2023-01-04 13:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (5, 5, 'Follow', 6, '2023-01-05 14:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (6, 6, 'Comment', 7, '2023-01-06 15:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (7, 7, 'Like', 8, '2023-01-07 16:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (8, 8, 'Follow', 9, '2023-01-08 17:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (9, 9, 'Comment', 10, '2023-01-09 18:00:00');
+INSERT INTO Social_Interactions (interaction_id, user_id, interaction_type, target_user_id, interaction_timestamp) VALUES (10, 10, 'Like', 1, '2023-01-10 19:00:00');

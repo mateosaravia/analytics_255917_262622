@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  app:
+    build: .
+    container_name: app
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/app/src
+    environment:
+      V_HOST: vertica_ce
+      V_PORT: 5433
+      V_USER: 'dbadmin'
+      V_PASSWORD: 'password'
+      V_DATABASE: 'VMart'
+
+  vertica_ce:
+    image: vertica/vertica-ce:11.1.0-0
+    container_name: vertica-ce
+    platform: linux/amd64
+    environment:
+      - VERTICA_MEMDEBUG=2
+    ports:
+      - "5433:5433"
+      - "5444:5444"
+    volumes:
+      - ./scripts:/scripts

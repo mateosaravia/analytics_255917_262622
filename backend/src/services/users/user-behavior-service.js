@@ -1,4 +1,5 @@
-const verticaClient = require('../../config/vertica-config');
+const { verticaClient } = require('../../config/vertica-config');
+require('dotenv').config();
 
 async function getSessionsDurationByGenre(id) {
   try {
@@ -25,21 +26,26 @@ async function getSessionsDurationByGenre(id) {
 
 async function getTotalSessionsDuration() {
   try {
-    await verticaClient.connect();
+    console.log('Fetching sessions duration by genre');
+
+    await client.connect();
+    console.log('Fetching sessions duration by genre');
 
     const query = `
       SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
       FROM Game_Sessions gs;
     `;
 
-    const result = await verticaClient.query(query);
+    const result = await client.query(query);
+    console.log('result', result);
+
     return result.rows[0];
 
   } catch (err) {
     console.error('Error fetching total sessions duration:', err);
     throw new Error('Database query error');
   } finally {
-    await verticaClient.end();
+    await client.end();
   }
 };
 

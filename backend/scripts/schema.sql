@@ -1,3 +1,13 @@
+CREATE TABLE Genres (
+    genre_id INT PRIMARY KEY,
+    genre_name VARCHAR(100)
+);
+
+CREATE TABLE Regions (
+    region_id INT PRIMARY KEY,
+    region_name VARCHAR(100)
+);
+
 CREATE TABLE Users (
     user_id INT PRIMARY KEY,
     name VARCHAR(255),
@@ -14,16 +24,6 @@ CREATE TABLE Games (
     price DECIMAL(10, 2),
     release_date DATE,
     FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
-);
-
-CREATE TABLE Genres (
-    genre_id INT PRIMARY KEY,
-    genre_name VARCHAR(100)
-);
-
-CREATE TABLE Regions (
-    region_id INT PRIMARY KEY,
-    region_name VARCHAR(100)
 );
 
 CREATE TABLE Transactions (

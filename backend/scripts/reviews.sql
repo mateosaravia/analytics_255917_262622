@@ -1,0 +1,10 @@
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (1, 1, 1, 'Great game! Really enjoyed the storyline.', 4, '2023-01-01 10:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (2, 2, 2, 'Awesome gameplay mechanics and graphics.', 5, '2023-01-02 11:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (3, 3, 3, 'Interesting characters and quests.', 3, '2023-01-03 12:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (4, 4, 4, 'Addictive simulation experience.', 4, '2023-01-04 13:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (5, 5, 5, 'Strategic depth and challenging scenarios.', 5, '2023-01-05 14:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (6, 6, 6, 'Fun sports game with realistic physics.', 3, '2023-01-06 15:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (7, 7, 7, 'Engaging puzzles and brain teasers.', 4, '2023-01-07 16:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (8, 8, 8, 'Interesting idle game to pass the time.', 2, '2023-01-08 17:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (9, 9, 9, 'Nostalgic arcade experience with modern twists.', 5, '2023-01-09 18:00:00');
+INSERT INTO Reviews (review_id, user_id, game_id, review_text, rating, review_date) VALUES (10, 10, 10, 'Fast-paced racing action with great tracks.', 4, '2023-01-10 19:00:00');
