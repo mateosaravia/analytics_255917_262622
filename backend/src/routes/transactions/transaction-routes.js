@@ -3,7 +3,7 @@ const userTransactionController = require('../../controllers/transactions/transa
 
 const router = Router();
 
-router.get('/gender/:id', userTransactionController.getAllTransactionsByGender);
+router.get('/genre/:id', userTransactionController.getAllTransactionsByGenre);
 router.get('/region/:id', userTransactionController.getAllTransactionsByRegion);
 
 module.exports = router;

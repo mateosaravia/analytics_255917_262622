@@ -1,9 +1,9 @@
 const userBehaviorService = require('../../services/users/user-behavior-service');
 
-async function getSessionsDurationByGender (req, res) {
+async function getSessionsDurationByGenre (req, res) {
   const { id } = req.params;
   try {
-    const sessionsDuration = await userBehaviorService.getSessionsDurationByGender(id);
+    const sessionsDuration = await userBehaviorService.getSessionsDurationByGenre(id);
     res.json(sessionsDuration);
   } catch (err) {
     console.error('Error fetching sessions duration: ', err);
@@ -52,7 +52,7 @@ async function getAvgSocialInteractions (req, res) {
 };
 
 module.exports = {
-  getSessionsDurationByGender,
+  getSessionsDurationByGenre,
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,

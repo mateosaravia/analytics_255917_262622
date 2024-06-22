@@ -1,9 +1,9 @@
 const userPreferencesService = require('../../services/users/user-preferences-service');
 
-async function getTopPreferencesByGender(req, res) {
+async function getTopPreferencesByGenre(req, res) {
     const { id } = req.params;
     try {
-        const preferences = await userPreferencesService.getTopPreferencesByGender(id);
+        const preferences = await userPreferencesService.getTopPreferencesByGenre(id);
         res.json(preferences);
     } catch (err) {
         console.error('Error fetching top preferences: ', err);
@@ -12,9 +12,8 @@ async function getTopPreferencesByGender(req, res) {
 };
 
 async function getTopPurchasePreferences(req, res) {
-    const { id } = req.params;
     try {
-        const preferences = await userPreferencesService.getTopPurchasePreferences(id);
+        const preferences = await userPreferencesService.getTopPurchasePreferences();
         res.json(preferences);
     } catch (err) {
         console.error('Error fetching top purchase preferences: ', err);
@@ -33,10 +32,10 @@ async function getTopPurchasePreferencesByRegion(req, res) {
     }
 };
 
-async function getAvgReviewByGender(req, res) {
+async function getAvgReviewByGenre(req, res) {
     const { id } = req.params;
     try {
-        const review = await userPreferencesService.getAvgReviewByGender(id);
+        const review = await userPreferencesService.getAvgReviewByGenre(id);
         res.json(review);
     } catch (err) {
         console.error('Error fetching average review: ', err);
@@ -45,8 +44,8 @@ async function getAvgReviewByGender(req, res) {
 };
 
 module.exports = {
-    getTopPreferencesByGender,
+    getTopPreferencesByGenre,
     getTopPurchasePreferences,
     getTopPurchasePreferencesByRegion,
-    getAvgReviewByGender,
+    getAvgReviewByGenre,
 };

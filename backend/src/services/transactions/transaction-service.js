@@ -1,21 +1,23 @@
 const verticaClient = require('../../config/vertica-config');
 
-async function getAllTransactionsByGender(id) {
+async function getAllTransactionsByGenre(id) {
     try {
         await verticaClient.connect();
     
         const query = `
-        SELECT transaction_id, user_id, transaction_date, amount, description
-        FROM user_transactions
-        WHERE user_id = $1
-        ORDER BY transaction_date DESC;
+            SELECT sum(t.quantity) AS total_amount
+            FROM Transactions t
+            JOIN Users u ON t.user_id = u.user_id
+            JOIN Games g ON t.game_id = g.game_id
+            JOIN Genres ge ON g.genre_id = ge.genre_id
+            WHERE ge.genre_id = $1;   
         `;
     
         const result = await verticaClient.query(query, [id]);
-        return result.rows;
+        return result.rows[0];
     
     } catch (err) {
-        console.error('Error fetching transactions by gender:', err);
+        console.error('Error fetching transactions by genre:', err);
         throw new Error('Database query error');
     }
     finally {
@@ -28,14 +30,15 @@ async function getAllTransactionsByRegion(id) {
         await verticaClient.connect();
     
         const query = `
-        SELECT transaction_id, user_id, transaction_date, amount, description
-        FROM user_transactions
-        WHERE user_id = $1
-        ORDER BY transaction_date DESC;
+            SELECT sum(t.quantity) AS total_amount
+            FROM Transactions t
+            JOIN Users u ON t.user_id = u.user_id
+            JOIN Regions r ON u.region_id = r.region_id
+            WHERE r.region_id = $1;    
         `;
     
         const result = await verticaClient.query(query, [id]);
-        return result.rows;
+        return result.rows[0];
     
     } catch (err) {
         console.error('Error fetching transactions by region:', err);
@@ -47,6 +50,6 @@ async function getAllTransactionsByRegion(id) {
 };
 
 module.exports = {
-    getAllTransactionsByGender,
+    getAllTransactionsByGenre,
     getAllTransactionsByRegion,
 };

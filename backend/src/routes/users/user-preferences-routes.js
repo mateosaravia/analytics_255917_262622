@@ -3,9 +3,9 @@ const userPreferencesController = require('../../controllers/users/user-preferen
 
 const router = Router();
 
-router.get('/gender/:id', userPreferencesController.getTopPreferencesByGender);
+router.get('/genre/:id', userPreferencesController.getTopPreferencesByGenre);
 router.get('/purchases', userPreferencesController.getTopPurchasePreferences);
 router.get('/purchases/region/:id', userPreferencesController.getTopPurchasePreferencesByRegion);
-router.get('/gender/:id/reviews', userPreferencesController.getAvgReviewByGender);
+router.get('/genre/:id/reviews', userPreferencesController.getAvgReviewByGenre);
 
 module.exports = router;

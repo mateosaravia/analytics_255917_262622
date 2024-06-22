@@ -1,13 +1,15 @@
 const verticaClient = require('../../config/vertica-config');
 
-async function getSessionsDurationByGender(id) {
+async function getSessionsDurationByGenre(id) {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT SUM(duration) AS sessions_duration
-      FROM user_sessions
-      WHERE user_id = $1;
+      SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
+      FROM Game_Sessions gs
+      JOIN Games gm ON gs.game_id = gm.game_id
+      JOIN Genres gr ON gm.genre_id = gr.genre_id
+      WHERE gr.genre_id = $1
     `;
 
     const result = await verticaClient.query(query, [id]);
@@ -26,8 +28,8 @@ async function getTotalSessionsDuration() {
     await verticaClient.connect();
 
     const query = `
-      SELECT SUM(duration) AS total_sessions_duration
-      FROM user_sessions;
+      SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
+      FROM Game_Sessions gs;
     `;
 
     const result = await verticaClient.query(query);
@@ -46,8 +48,8 @@ async function getAverageSessionsDuration() {
     await verticaClient.connect();
 
     const query = `
-      SELECT AVG(duration) AS average_sessions_duration
-      FROM user_sessions;
+      SELECT AVG(EXTRACT(EPOCH FROM (session_end - session_start))) AS average_duration_seconds
+      FROM Game_Sessions;
     `;
 
     const result = await verticaClient.query(query);
@@ -67,7 +69,7 @@ async function getAllSocialInteractions() {
 
     const query = `
       SELECT COUNT(*) AS social_interactions
-      FROM user_social_interactions;
+      FROM Social_Interactions;
     `;
 
     const result = await verticaClient.query(query);
@@ -86,8 +88,12 @@ async function getAverageSocialInteractions() {
     await verticaClient.connect();
 
     const query = `
-      SELECT AVG(interactions_count) AS average_social_interactions
-      FROM user_social_interactions;
+      SELECT AVG(interaction_count) AS average_interaction_count
+      FROM (
+          SELECT user_id, COUNT(*) AS interaction_count
+          FROM Social_Interactions
+          GROUP BY user_id
+      ) AS interaction_counts;
     `;
 
     const result = await verticaClient.query(query);
@@ -102,7 +108,7 @@ async function getAverageSocialInteractions() {
 };
 
 module.exports = {
-  getSessionsDurationByGender,
+  getSessionsDurationByGenre,
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,

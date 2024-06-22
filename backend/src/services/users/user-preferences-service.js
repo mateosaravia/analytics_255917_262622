@@ -1,14 +1,15 @@
 const verticaClient = require('../../config/vertica-config');
 
-async function getTopPreferencesByGender(id) {
+async function getTopPreferencesByGenre(id) {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT preference_id, user_id, preference_name, preference_value
-      FROM user_preferences
-      WHERE user_id = $1
-      ORDER BY preference_value DESC;
+      SELECT COUNT(preference_id), category, value
+      FROM User_Preferences
+      GROUP BY category, value
+      ORDER BY COUNT(preference_id) DESC
+      LIMIT 5;
     `;
     const result = await verticaClient.query(query, [id]);
     return result.rows;
@@ -22,15 +23,17 @@ async function getTopPreferencesByGender(id) {
   }
 };
 
-async function getTopPurchasePreferences(id) {
+async function getTopPurchasePreferences() {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT preference_id, user_id, preference_name, preference_value
-      FROM user_preferences
-      WHERE user_id = $1
-      ORDER BY preference_value DESC;
+      SELECT g.name, COUNT(t.game_id) AS total_purchases
+      FROM Transactions t
+      JOIN Games g ON t.game_id = g.game_id
+      GROUP BY g.name
+      ORDER BY total_purchases DESC
+      LIMIT 5;
     `;
     const result = await verticaClient.query(query, [id]);
     return result.rows;
@@ -49,10 +52,14 @@ async function getTopPurchasePreferencesByRegion(id) {
     await verticaClient.connect();
 
     const query = `
-      SELECT preference_id, user_id, preference_name, preference_value
-      FROM user_preferences
-      WHERE user_id = $1
-      ORDER BY preference_value DESC;
+      SELECT g.name, COUNT(t.game_id) AS total_purchases
+      FROM Transactions t
+      JOIN Games g ON t.game_id = g.game_id
+      JOIN Users u ON t.user_id = u.user_id
+      WHERE u.region_id = $1
+      GROUP BY g.name
+      ORDER BY total_purchases DESC
+      LIMIT 5;
     `;
     const result = await verticaClient.query(query, [id]);
     return result.rows;
@@ -66,14 +73,16 @@ async function getTopPurchasePreferencesByRegion(id) {
   }
 };
 
-async function getAvgReviewByGender(id) {
+async function getAvgReviewByGenre(id) {
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT AVG(review) AS avg_review
-      FROM user_reviews
-      WHERE user_id = $1;
+      SELECT AVG(rating) AS average_review
+      FROM Reviews r
+      JOIN Games g ON r.game_id = g.game_id
+      JOIN Genres gr ON g.genre_id = gr.genre_id
+      WHERE gr.genre_id = $1
     `;
     const result = await verticaClient.query(query, [id]);
     return result.rows[0];
@@ -88,9 +97,9 @@ async function getAvgReviewByGender(id) {
 };
 
 module.exports = {
-    getTopPreferencesByGender,
+    getTopPreferencesByGenre,
     getTopPurchasePreferences,
     getTopPurchasePreferencesByRegion,
-    getAvgReviewByGender,
+    getAvgReviewByGenre,
 };
 
