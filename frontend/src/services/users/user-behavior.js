@@ -1,9 +1,9 @@
 import axios from '../axios';
 import handleError  from '../errors/handle-errors';
 
-async function getSessionsDurationByGender(genderId) {
+async function getSessionsDurationByGenre(genreId) {
     return await axios
-        .get(`/user-behavior/total-sessions-duration/gender/${genderId}`, { params: { active: true } })
+        .get(`/user-behavior/total-sessions-duration/genre/${genreId}`, { params: { active: true } })
         .then((response) => {
             return response.data;
         })
@@ -14,10 +14,11 @@ async function getSessionsDurationByGender(genderId) {
 };
 
 async function getTotalSessionsDuration() {
+    console.log('getTotalSessionsDuration');
     return await axios
-        .get(`/user-behavior/total-sessions-duration`, { params: { active: true } })
+        .get(`/user-behavior/total-sessions-duration`)
         .then((response) => {
-            return response.data;
+            return response.data.total_duration_seconds;
         })
         .catch((error) => {
             handleError(error);
@@ -27,9 +28,9 @@ async function getTotalSessionsDuration() {
 
 async function getAverageSessionsDuration() {
     return await axios
-        .get(`/user-behavior/average-sessions-duration`, { params: { active: true } })
+        .get(`/user-behavior/average-sessions-duration`)
         .then((response) => {
-            return response.data;
+            return response.data.average_duration_seconds;
         })
         .catch((error) => {
             handleError(error);
@@ -41,7 +42,7 @@ async function getAllSocialInteractions() {
     return await axios
         .get(`/user-behavior/social-interactions`, { params: { active: true } })
         .then((response) => {
-            return response.data;
+            return response.data.social_interactions;
         })
         .catch((error) => {
             handleError(error);
@@ -53,7 +54,7 @@ async function getAverageSocialInteractions() {
     return await axios
         .get(`/user-behavior/average-social-interactions`, { params: { active: true } })
         .then((response) => {
-            return response.data;
+            return response.data.average_interaction_count;
         })
         .catch((error) => {
             handleError(error);
@@ -62,7 +63,7 @@ async function getAverageSocialInteractions() {
 };
 
 export {
-  getSessionsDurationByGender,
+  getSessionsDurationByGenre,
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,
