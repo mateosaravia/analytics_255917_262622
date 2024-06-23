@@ -1,6 +1,7 @@
-const verticaClient = require('../../config/vertica-config');
+const { getVerticaClient } = require('../../config/vertica-config');
 
 async function getAllTransactionsByGenre(id) {
+    const verticaClient = await getVerticaClient();
     try {
         await verticaClient.connect();
     
@@ -26,6 +27,7 @@ async function getAllTransactionsByGenre(id) {
 };
 
 async function getAllTransactionsByRegion(id) {
+    const verticaClient = await getVerticaClient();
     try {
         await verticaClient.connect();
     

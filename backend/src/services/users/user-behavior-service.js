@@ -1,16 +1,17 @@
-const { verticaClient } = require('../../config/vertica-config');
+const { getVerticaClient } = require('../../config/vertica-config');
 require('dotenv').config();
 
 async function getSessionsDurationByGenre(id) {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
     const query = `
-      SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
+      SELECT gs.game_id
       FROM Game_Sessions gs
       JOIN Games gm ON gs.game_id = gm.game_id
       JOIN Genres gr ON gm.genre_id = gr.genre_id
-      WHERE gr.genre_id = $1
+      WHERE gm.genre_id = $1
     `;
 
     const result = await verticaClient.query(query, [id]);
@@ -25,37 +26,33 @@ async function getSessionsDurationByGenre(id) {
 };
 
 async function getTotalSessionsDuration() {
+  const verticaClient = await getVerticaClient();
   try {
-    console.log('Fetching sessions duration by genre');
-
-    await client.connect();
-    console.log('Fetching sessions duration by genre');
+    await verticaClient.connect();
 
     const query = `
       SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
-      FROM Game_Sessions gs;
+      FROM analytics.Game_Sessions gs;
     `;
 
-    const result = await client.query(query);
-    console.log('result', result);
-
+    const result = await verticaClient.query(query);
     return result.rows[0];
-
   } catch (err) {
     console.error('Error fetching total sessions duration:', err);
     throw new Error('Database query error');
   } finally {
-    await client.end();
+    await verticaClient.end();
   }
 };
 
 async function getAverageSessionsDuration() {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
     const query = `
       SELECT AVG(EXTRACT(EPOCH FROM (session_end - session_start))) AS average_duration_seconds
-      FROM Game_Sessions;
+      FROM analytics.Game_Sessions;
     `;
 
     const result = await verticaClient.query(query);
@@ -70,6 +67,7 @@ async function getAverageSessionsDuration() {
 };
 
 async function getAllSocialInteractions() {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
@@ -90,6 +88,7 @@ async function getAllSocialInteractions() {
 };
 
 async function getAverageSocialInteractions() {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 

@@ -3,7 +3,7 @@ services:
 
   app:
     build: .
-    container_name: app
+    container_name: backend-app
     ports:
       - '3000:3000'
     volumes:

@@ -1,6 +1,7 @@
-const verticaClient = require('../../config/vertica-config');
+const { getVerticaClient } = require('../../config/vertica-config');
 
 async function getTopPreferencesByGenre(id) {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
@@ -24,6 +25,7 @@ async function getTopPreferencesByGenre(id) {
 };
 
 async function getTopPurchasePreferences() {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
@@ -48,6 +50,7 @@ async function getTopPurchasePreferences() {
 };
 
 async function getTopPurchasePreferencesByRegion(id) {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 
@@ -74,6 +77,7 @@ async function getTopPurchasePreferencesByRegion(id) {
 };
 
 async function getAvgReviewByGenre(id) {
+  const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
 

@@ -9,6 +9,8 @@ const verticaConfig = {
   port: process.env['V_PORT'],
 };
 
-const verticaClient = new Client(verticaConfig);
+const getVerticaClient = async () => {
+  return new Client(verticaConfig);
+};
 
-module.exports = verticaClient;
+module.exports = { getVerticaClient };
