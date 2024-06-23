@@ -7,14 +7,14 @@ async function getSessionsDurationByGenre(id) {
     await verticaClient.connect();
 
     const query = `
-      SELECT gs.game_id
+      SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
       FROM Game_Sessions gs
       JOIN Games gm ON gs.game_id = gm.game_id
       JOIN Genres gr ON gm.genre_id = gr.genre_id
-      WHERE gm.genre_id = $1
+      WHERE gr.genre_id = ${id}
     `;
 
-    const result = await verticaClient.query(query, [id]);
+    const result = await verticaClient.query(query);
     return result.rows[0];
 
   } catch (err) {
@@ -27,12 +27,12 @@ async function getSessionsDurationByGenre(id) {
 
 async function getTotalSessionsDuration() {
   const verticaClient = await getVerticaClient();
+
   try {
     await verticaClient.connect();
-
     const query = `
       SELECT SUM(EXTRACT(EPOCH FROM (gs.session_end - gs.session_start))) AS total_duration_seconds
-      FROM analytics.Game_Sessions gs;
+      FROM Game_Sessions gs;
     `;
 
     const result = await verticaClient.query(query);
@@ -52,7 +52,7 @@ async function getAverageSessionsDuration() {
 
     const query = `
       SELECT AVG(EXTRACT(EPOCH FROM (session_end - session_start))) AS average_duration_seconds
-      FROM analytics.Game_Sessions;
+      FROM Game_Sessions;
     `;
 
     const result = await verticaClient.query(query);
@@ -87,7 +87,7 @@ async function getAllSocialInteractions() {
   }
 };
 
-async function getAverageSocialInteractions() {
+async function getAvgSocialInteractions() {
   const verticaClient = await getVerticaClient();
   try {
     await verticaClient.connect();
@@ -117,5 +117,5 @@ module.exports = {
   getTotalSessionsDuration,
   getAverageSessionsDuration,
   getAllSocialInteractions,
-  getAverageSocialInteractions,
+  getAvgSocialInteractions,
 };

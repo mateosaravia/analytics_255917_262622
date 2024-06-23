@@ -12,7 +12,7 @@ async function getTopPreferencesByGenre(id) {
       ORDER BY COUNT(preference_id) DESC
       LIMIT 5;
     `;
-    const result = await verticaClient.query(query, [id]);
+    const result = await verticaClient.query(query);
     return result.rows;
 
   } catch (err) {
@@ -37,7 +37,7 @@ async function getTopPurchasePreferences() {
       ORDER BY total_purchases DESC
       LIMIT 5;
     `;
-    const result = await verticaClient.query(query, [id]);
+    const result = await verticaClient.query(query);
     return result.rows;
 
   } catch (err) {
@@ -59,12 +59,12 @@ async function getTopPurchasePreferencesByRegion(id) {
       FROM Transactions t
       JOIN Games g ON t.game_id = g.game_id
       JOIN Users u ON t.user_id = u.user_id
-      WHERE u.region_id = $1
+      WHERE u.region_id = ${id}
       GROUP BY g.name
       ORDER BY total_purchases DESC
       LIMIT 5;
     `;
-    const result = await verticaClient.query(query, [id]);
+    const result = await verticaClient.query(query);
     return result.rows;
 
   } catch (err) {
@@ -86,9 +86,9 @@ async function getAvgReviewByGenre(id) {
       FROM Reviews r
       JOIN Games g ON r.game_id = g.game_id
       JOIN Genres gr ON g.genre_id = gr.genre_id
-      WHERE gr.genre_id = $1
+      WHERE gr.genre_id = ${id};
     `;
-    const result = await verticaClient.query(query, [id]);
+    const result = await verticaClient.query(query);
     return result.rows[0];
 
   } catch (err) {
