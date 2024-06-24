@@ -9,7 +9,7 @@ CREATE TABLE Regions (
 );
 
 CREATE TABLE Users (
-    user_id INT,
+    user_id INT PRIMARY KEY, 
     name VARCHAR(255),
     email VARCHAR(255),
     registration_date TIMESTAMP,
@@ -17,7 +17,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Games (
-    game_id INT,
+    game_id INT PRIMARY KEY,
     name VARCHAR(255),
     genre_id INT,
     price DECIMAL(10, 2),
@@ -25,7 +25,7 @@ CREATE TABLE Games (
 );
 
 CREATE TABLE Transactions (
-    transaction_id INT,
+    transaction_id INT PRIMARY KEY,
     user_id INT,
     game_id INT,
     transaction_date TIMESTAMP,
@@ -33,14 +33,14 @@ CREATE TABLE Transactions (
 );
 
 CREATE TABLE User_Preferences (
-    preference_id INT,
+    preference_id INT PRIMARY KEY,
     user_id INT,
     category VARCHAR(100),
     value VARCHAR(255)
 );
 
 CREATE TABLE Game_Sessions (
-    session_id INT,
+    session_id INT PRIMARY KEY,
     user_id INT,
     game_id INT,
     session_start TIMESTAMP,
@@ -48,7 +48,7 @@ CREATE TABLE Game_Sessions (
 );
 
 CREATE TABLE Social_Interactions (
-    interaction_id INT,
+    interaction_id INT PRIMARY KEY,
     user_id INT,
     interaction_type VARCHAR(50),
     target_user_id INT,
@@ -56,7 +56,7 @@ CREATE TABLE Social_Interactions (
 );
 
 CREATE TABLE Reviews (
-    review_id INT,
+    review_id INT PRIMARY KEY,
     user_id INT,
     game_id INT,
     review_text VARCHAR(255),
