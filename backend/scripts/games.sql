@@ -1,0 +1,10 @@
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (1, 'The Legend of Adventure', 2, 59.99, '2020-03-01');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (2, 'Space Odyssey', 1, 49.99, '2021-05-15');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (3, 'Mystic Quest', 3, 39.99, '2019-07-22');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (4, 'Farm Simulator', 4, 29.99, '2018-11-30');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (5, 'Empire Builder', 5, 19.99, '2022-01-10');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (6, 'Soccer Pro', 6, 59.99, '2020-08-05');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (7, 'Brain Teasers', 7, 9.99, '2021-09-17');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (8, 'Idle Miner', 8, 0.99, '2023-02-25');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (9, 'Retro Arcade', 9, 14.99, '2019-10-31');
+INSERT INTO Games (game_id, name, genre_id, price, release_date) VALUES (10, 'Speed Racer', 10, 49.99, '2022-06-18');
