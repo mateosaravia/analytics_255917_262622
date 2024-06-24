@@ -1,0 +1,10 @@
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (1, 1, 1, '2023-01-01 10:00:00', '2023-01-01 12:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (2, 2, 2, '2023-01-02 11:00:00', '2023-01-02 13:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (3, 3, 3, '2023-01-03 12:00:00', '2023-01-03 14:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (4, 4, 4, '2023-01-04 13:00:00', '2023-01-04 15:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (5, 5, 5, '2023-01-05 14:00:00', '2023-01-05 16:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (6, 6, 6, '2023-01-06 15:00:00', '2023-01-06 17:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (7, 7, 7, '2023-01-07 16:00:00', '2023-01-07 18:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (8, 8, 8, '2023-01-08 17:00:00', '2023-01-08 19:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (9, 9, 9, '2023-01-09 18:00:00', '2023-01-09 20:00:00');
+INSERT INTO Game_Sessions (session_id, user_id, game_id, session_start, session_end) VALUES (10, 10, 10, '2023-01-10 19:00:00', '2023-01-10 21:00:00');

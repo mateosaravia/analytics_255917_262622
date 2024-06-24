@@ -1,0 +1,10 @@
+INSERT INTO Regions (region_id, region_name) VALUES (1, 'North America');
+INSERT INTO Regions (region_id, region_name) VALUES (2, 'Europe');
+INSERT INTO Regions (region_id, region_name) VALUES (3, 'Asia');
+INSERT INTO Regions (region_id, region_name) VALUES (4, 'South America');
+INSERT INTO Regions (region_id, region_name) VALUES (5, 'Africa');
+INSERT INTO Regions (region_id, region_name) VALUES (6, 'Australia');
+INSERT INTO Regions (region_id, region_name) VALUES (7, 'Antarctica');
+INSERT INTO Regions (region_id, region_name) VALUES (8, 'Middle East');
+INSERT INTO Regions (region_id, region_name) VALUES (9, 'Central America');
+INSERT INTO Regions (region_id, region_name) VALUES (10, 'Caribbean');

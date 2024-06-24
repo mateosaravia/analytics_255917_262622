@@ -1,0 +1,10 @@
+INSERT INTO Genres (genre_id, genre_name) VALUES (1, 'Action');
+INSERT INTO Genres (genre_id, genre_name) VALUES (2, 'Adventure');
+INSERT INTO Genres (genre_id, genre_name) VALUES (3, 'Role-Playing');
+INSERT INTO Genres (genre_id, genre_name) VALUES (4, 'Simulation');
+INSERT INTO Genres (genre_id, genre_name) VALUES (5, 'Strategy');
+INSERT INTO Genres (genre_id, genre_name) VALUES (6, 'Sports');
+INSERT INTO Genres (genre_id, genre_name) VALUES (7, 'Puzzle');
+INSERT INTO Genres (genre_id, genre_name) VALUES (8, 'Idle');
+INSERT INTO Genres (genre_id, genre_name) VALUES (9, 'Arcade');
+INSERT INTO Genres (genre_id, genre_name) VALUES (10, 'Racing');

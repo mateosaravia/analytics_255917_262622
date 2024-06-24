@@ -1,0 +1,10 @@
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (1, 'Alice', 'alice@email.com', '2020-01-01', 1);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (2, 'Bob', 'bob@email.com', '2020-02-15', 2);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (3, 'Charlie', 'charlie@email.com', '2020-03-10', 1);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (4, 'David', 'david@email.com', '2020-04-25', 3);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (5, 'Eve', 'eve@email.com', '2020-05-05', 2);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (6, 'Frank', 'frank@email.com', '2020-06-20', 4);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (7, 'Grace', 'grace@email.com', '2020-07-15', 1);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (8, 'Heidi', 'heidi@email.com', '2020-08-30', 3);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (9, 'Ivan', 'ivan@email.com', '2020-09-10', 4);
+INSERT INTO Users (user_id, name, email, registration_date, region_id) VALUES (10, 'Judy', 'judy@email.com', '2020-10-05', 2);
