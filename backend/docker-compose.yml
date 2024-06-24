@@ -4,7 +4,7 @@ name: analytics
 services:
   app:
     build: .
-    container_name: backend-app
+    container_name: analytics-backend
     ports:
       - '3000:3000'
     volumes:
