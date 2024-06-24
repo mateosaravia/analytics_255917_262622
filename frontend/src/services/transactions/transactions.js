@@ -3,7 +3,7 @@ import handleError  from '../errors/handle-errors';
 
 async function getAllTransactionsByGenre(genreId) {
   return await axios
-    .get(`'/transactions/genre/${genreId}`, { params: { active: true } })
+    .get(`/transactions/genre/${genreId}`)
     .then((response) => {
       return response.data;
     })
@@ -15,7 +15,7 @@ async function getAllTransactionsByGenre(genreId) {
 
 async function getAllTransactionsByRegion(regionId) {
   return await axios
-    .get(`'/transactions/region/${regionId}`, { params: { active: true } })
+    .get(`/transactions/region/${regionId}`)
     .then((response) => {
       return response.data;
     })

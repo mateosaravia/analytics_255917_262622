@@ -14,7 +14,6 @@ async function getSessionsDurationByGenre(genreId) {
 };
 
 async function getTotalSessionsDuration() {
-    console.log('getTotalSessionsDuration');
     return await axios
         .get(`/user-behavior/total-sessions-duration`)
         .then((response) => {

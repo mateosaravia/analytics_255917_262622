@@ -75,8 +75,8 @@ async function getAllSocialInteractions() {
       SELECT COUNT(*) AS social_interactions
       FROM Social_Interactions;
     `;
-
     const result = await verticaClient.query(query);
+
     return result.rows[0];
 
   } catch (err) {

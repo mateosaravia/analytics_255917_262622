@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserBehaviorCard from "./UserBehaviorCard";
 import { getAllSocialInteractions, getAverageSessionsDuration, getAverageSocialInteractions, getTotalSessionsDuration } from "../../services/users/user-behavior";
-import { getTopPurchasePreferences } from "../../services/users/user-preferences";
+import { getTopPreferencesByGenre, getTopPurchasePreferences, getTopPurchasePreferencesByRegion } from "../../services/users/user-preferences";
 
 const UserBehaviorPanel = () => {
     const [data, setData] = useState({
@@ -26,8 +26,9 @@ const UserBehaviorPanel = () => {
                 ] = await Promise.all([
                     getTotalSessionsDuration(),
                     getAverageSessionsDuration(),
+                    //getTopPreferencesByGenre(1), -> da problemas
                     Promise.resolve("Data not available"),
-                    Promise.resolve("Data not available"),
+                    getTopPurchasePreferences(),
                     getAllSocialInteractions(),
                     getAverageSocialInteractions(),
                     //getTopPurchasePreferences(),
@@ -60,27 +61,40 @@ const UserBehaviorPanel = () => {
                     <div className="mb-6">
                         <UserBehaviorCard 
                             title="Total sessions duration" 
-                            description={data.totalSessionsDuration || "Loading..."} 
+                            description={data.totalSessionsDuration || "No data available"} 
                         />
                     </div>
                     <div className="mt-12">
                         <UserBehaviorCard 
                             title="Average sessions duration" 
-                            description={data.averageSessionsDuration || "Loading..."} 
+                            description={data.averageSessionsDuration || "No data available"} 
                         />
                     </div>
                 </div>
                 <div>
                     <div className="m-6">
                         <UserBehaviorCard 
-                            title="Top 5 preferred genres" 
-                            description={data.topPreferredGenres || "Loading..."} 
+                            title="Top 5 user preferences" 
+                            description={
+                                //data.topPreferredGenres && data.topPreferredGenres.length > 0
+                                //? data.topPreferredGenres.map(item => `${item.category}: ${item.value} (${item.COUNT})`).join(', ')
+                                //: data.topPreferredGenres && data.topPreferredGenres.length === 0
+                                //? "No data available"
+                                //: "Loading..."
+                                "No data available"
+                            } 
                         />
                     </div>
                     <div className="mt-12">
                         <UserBehaviorCard 
                             title="Top 5 purchase preferences" 
-                            description={data.topPurchasePreferences || "Loading..."} 
+                            description={
+                                data.topPurchasePreferences && data.topPurchasePreferences.length > 0
+                                ? data.topPurchasePreferences.map(item => `${item.name} (${item.total_purchases})`).join(', ')
+                                : data.topPurchasePreferences && data.topPurchasePreferences.length === 0
+                                ? "No data available"
+                                : "Loading..."
+                            } 
                         />
                     </div>
                 </div>
@@ -88,13 +102,13 @@ const UserBehaviorPanel = () => {
                     <div className="mb-6">
                         <UserBehaviorCard 
                             title="Total social interactions" 
-                            description={data.totalSocialInteractions || "Loading..."} 
+                            description={data.totalSocialInteractions || "No data available"} 
                         />
                     </div>
                     <div className="mt-12">
                         <UserBehaviorCard 
                             title="Average social interaction" 
-                            description={data.averageSocialInteraction || "Loading..."} 
+                            description={data.averageSocialInteraction || "No data available"} 
                         />
                     </div>
                 </div>

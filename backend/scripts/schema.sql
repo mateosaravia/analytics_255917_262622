@@ -32,13 +32,6 @@ CREATE TABLE Transactions (
     quantity INT
 );
 
-CREATE TABLE Browsing_History (
-    history_id INT,
-    user_id INT,
-    page_visited VARCHAR(255),
-    timestamp TIMESTAMP
-);
-
 CREATE TABLE User_Preferences (
     preference_id INT,
     user_id INT,
